@@ -7,13 +7,14 @@
 /* eslint-disable */
 import * as React from "react";
 import { fetchByPath, validateField } from "./utils";
-import { Draft } from "../models";
+import { Project } from "../models";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Button, Flex, Grid } from "@aws-amplify/ui-react";
+import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
 import { DataStore } from "aws-amplify";
-export default function DraftCreateForm(props) {
+export default function ProjectUpdateForm(props) {
   const {
-    clearOnSuccess = true,
+    id,
+    project,
     onSuccess,
     onError,
     onSubmit,
@@ -23,12 +24,28 @@ export default function DraftCreateForm(props) {
     overrides,
     ...rest
   } = props;
-  const initialValues = {};
+  const initialValues = {
+    name: undefined,
+  };
+  const [name, setName] = React.useState(initialValues.name);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
+    const cleanValues = { ...initialValues, ...projectRecord };
+    setName(cleanValues.name);
     setErrors({});
   };
-  const validations = {};
+  const [projectRecord, setProjectRecord] = React.useState(project);
+  React.useEffect(() => {
+    const queryData = async () => {
+      const record = id ? await DataStore.query(Project, id) : project;
+      setProjectRecord(record);
+    };
+    queryData();
+  }, [id, project]);
+  React.useEffect(resetStateValues, [projectRecord]);
+  const validations = {
+    name: [{ type: "Required" }],
+  };
   const runValidationTasks = async (fieldName, value) => {
     let validationResponse = validateField(value, validations[fieldName]);
     const customValidator = fetchByPath(onValidate, fieldName);
@@ -46,7 +63,9 @@ export default function DraftCreateForm(props) {
       padding="20px"
       onSubmit={async (event) => {
         event.preventDefault();
-        let modelFields = {};
+        let modelFields = {
+          name,
+        };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
             if (Array.isArray(modelFields[fieldName])) {
@@ -70,12 +89,13 @@ export default function DraftCreateForm(props) {
           modelFields = onSubmit(modelFields);
         }
         try {
-          await DataStore.save(new Draft(modelFields));
+          await DataStore.save(
+            Project.copyOf(projectRecord, (updated) => {
+              Object.assign(updated, modelFields);
+            })
+          );
           if (onSuccess) {
             onSuccess(modelFields);
-          }
-          if (clearOnSuccess) {
-            resetStateValues();
           }
         } catch (err) {
           if (onError) {
@@ -84,17 +104,41 @@ export default function DraftCreateForm(props) {
         }
       }}
       {...rest}
-      {...getOverrideProps(overrides, "DraftCreateForm")}
+      {...getOverrideProps(overrides, "ProjectUpdateForm")}
     >
+      <TextField
+        label="Name"
+        isRequired={true}
+        isReadOnly={false}
+        defaultValue={name}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              name: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.name ?? value;
+          }
+          if (errors.name?.hasError) {
+            runValidationTasks("name", value);
+          }
+          setName(value);
+        }}
+        onBlur={() => runValidationTasks("name", name)}
+        errorMessage={errors.name?.errorMessage}
+        hasError={errors.name?.hasError}
+        {...getOverrideProps(overrides, "name")}
+      ></TextField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}
       >
         <Button
-          children="Clear"
+          children="Reset"
           type="reset"
           onClick={resetStateValues}
-          {...getOverrideProps(overrides, "ClearButton")}
+          {...getOverrideProps(overrides, "ResetButton")}
         ></Button>
         <Flex {...getOverrideProps(overrides, "RightAlignCTASubFlex")}>
           <Button

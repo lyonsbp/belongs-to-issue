@@ -4,12 +4,10 @@ import { schema } from './schema';
 
 
 
-const { Draft, Edition, Book, Author, BookAuthor } = initSchema(schema);
+const { Member, Team, Project } = initSchema(schema);
 
 export {
-  Draft,
-  Edition,
-  Book,
-  Author,
-  BookAuthor
+  Member,
+  Team,
+  Project
 };

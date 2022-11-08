@@ -1,0 +1,17 @@
+type Member @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  teamID: ID! @index(name: "byTeam")
+}
+
+type Team @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String!
+  Project: Project @hasOne
+  Members: [Member] @hasMany(indexName: "byTeam", fields: ["id"])
+}
+
+type Project @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String!
+}
