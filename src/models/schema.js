@@ -141,7 +141,9 @@ export const schema = {
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "book"
+                        "associatedWith": [
+                            "book"
+                        ]
                     }
                 },
                 "Editions": {
@@ -155,7 +157,9 @@ export const schema = {
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "bookID"
+                        "associatedWith": [
+                            "bookID"
+                        ]
                     }
                 },
                 "Draft": {
@@ -168,8 +172,12 @@ export const schema = {
                     "attributes": [],
                     "association": {
                         "connectionType": "HAS_ONE",
-                        "associatedWith": "id",
-                        "targetName": "bookDraftId"
+                        "associatedWith": [
+                            "id"
+                        ],
+                        "targetNames": [
+                            "bookDraftId"
+                        ]
                     }
                 },
                 "createdAt": {
@@ -242,7 +250,9 @@ export const schema = {
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "author"
+                        "associatedWith": [
+                            "author"
+                        ]
                     }
                 },
                 "createdAt": {
@@ -297,6 +307,20 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "bookId": {
+                    "name": "bookId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "authorId": {
+                    "name": "authorId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "book": {
                     "name": "book",
                     "isArray": false,
@@ -307,7 +331,9 @@ export const schema = {
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
-                        "targetName": "bookID"
+                        "targetNames": [
+                            "bookId"
+                        ]
                     }
                 },
                 "author": {
@@ -320,7 +346,9 @@ export const schema = {
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
-                        "targetName": "authorID"
+                        "targetNames": [
+                            "authorId"
+                        ]
                     }
                 },
                 "createdAt": {
@@ -352,7 +380,7 @@ export const schema = {
                     "properties": {
                         "name": "byBook",
                         "fields": [
-                            "bookID"
+                            "bookId"
                         ]
                     }
                 },
@@ -361,7 +389,7 @@ export const schema = {
                     "properties": {
                         "name": "byAuthor",
                         "fields": [
-                            "authorID"
+                            "authorId"
                         ]
                     }
                 }
@@ -371,5 +399,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.1",
-    "version": "18739075ca0e74059c676eb719d266ef"
+    "version": "51b2d9c1e30669f9d11077fe19644bd6"
 };
