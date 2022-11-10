@@ -24,6 +24,19 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "Team": {
+                    "name": "Team",
+                    "isArray": false,
+                    "type": {
+                        "model": "Team"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "teamMembersId"
+                    }
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -102,7 +115,7 @@ export const schema = {
                     "attributes": [],
                     "association": {
                         "connectionType": "HAS_ONE",
-                        "associatedWith": "id",
+                        "associatedWith": "Team",
                         "targetName": "teamProjectId"
                     }
                 },
@@ -186,6 +199,19 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "Team": {
+                    "name": "Team",
+                    "isArray": false,
+                    "type": {
+                        "model": "Team"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "projectTeamId"
+                    }
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -232,5 +258,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.1",
-    "version": "c076b88a793bd13c9cef8a4b906caf6b"
+    "version": "f4d166560661ebce8a75b9c1b1735ed1"
 };

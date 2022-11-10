@@ -4,6 +4,7 @@
  * Any changes to this file will be overwritten when running amplify pull. *
  **************************************************************************/
 
+export { default as TestMemberCreate } from "./TestMemberCreate";
 export { default as TeamCreateForm } from "./TeamCreateForm";
 export { default as TeamUpdateForm } from "./TeamUpdateForm";
 export { default as ProjectCreateForm } from "./ProjectCreateForm";

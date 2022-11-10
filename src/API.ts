@@ -2,51 +2,22 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateDraftInput = {
+export type CreateMemberInput = {
   id?: string | null,
+  name?: string | null,
+  teamID: string,
   _version?: number | null,
 };
 
-export type ModelDraftConditionInput = {
-  and?: Array< ModelDraftConditionInput | null > | null,
-  or?: Array< ModelDraftConditionInput | null > | null,
-  not?: ModelDraftConditionInput | null,
+export type ModelMemberConditionInput = {
+  name?: ModelStringInput | null,
+  teamID?: ModelIDInput | null,
+  and?: Array< ModelMemberConditionInput | null > | null,
+  or?: Array< ModelMemberConditionInput | null > | null,
+  not?: ModelMemberConditionInput | null,
 };
 
-export type Draft = {
-  __typename: "Draft",
-  id: string,
-  createdAt: string,
-  updatedAt: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
-};
-
-export type UpdateDraftInput = {
-  id: string,
-  _version?: number | null,
-};
-
-export type DeleteDraftInput = {
-  id: string,
-  _version?: number | null,
-};
-
-export type CreateEditionInput = {
-  id?: string | null,
-  bookID: string,
-  _version?: number | null,
-};
-
-export type ModelEditionConditionInput = {
-  bookID?: ModelIDInput | null,
-  and?: Array< ModelEditionConditionInput | null > | null,
-  or?: Array< ModelEditionConditionInput | null > | null,
-  not?: ModelEditionConditionInput | null,
-};
-
-export type ModelIDInput = {
+export type ModelStringInput = {
   ne?: string | null,
   eq?: string | null,
   le?: string | null,
@@ -86,10 +57,28 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
-export type Edition = {
-  __typename: "Edition",
+export type ModelIDInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
+};
+
+export type Member = {
+  __typename: "Member",
   id: string,
-  bookID: string,
+  name?: string | null,
+  teamID: string,
+  Team?: Team | null,
   createdAt: string,
   updatedAt: string,
   _version: number,
@@ -97,206 +86,147 @@ export type Edition = {
   _lastChangedAt: number,
 };
 
-export type UpdateEditionInput = {
+export type Team = {
+  __typename: "Team",
   id: string,
-  bookID?: string | null,
+  name: string,
+  Project?: Project | null,
+  Members?: ModelMemberConnection | null,
+  createdAt: string,
+  updatedAt: string,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
+  teamProjectId?: string | null,
+};
+
+export type Project = {
+  __typename: "Project",
+  id: string,
+  name: string,
+  createdAt: string,
+  updatedAt: string,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
+};
+
+export type ModelMemberConnection = {
+  __typename: "ModelMemberConnection",
+  items:  Array<Member | null >,
+  nextToken?: string | null,
+  startedAt?: number | null,
+};
+
+export type UpdateMemberInput = {
+  id: string,
+  name?: string | null,
+  teamID?: string | null,
   _version?: number | null,
 };
 
-export type DeleteEditionInput = {
+export type DeleteMemberInput = {
   id: string,
   _version?: number | null,
 };
 
-export type CreateBookInput = {
+export type CreateTeamInput = {
   id?: string | null,
+  name: string,
   _version?: number | null,
-  bookDraftId?: string | null,
+  teamProjectId?: string | null,
 };
 
-export type ModelBookConditionInput = {
-  and?: Array< ModelBookConditionInput | null > | null,
-  or?: Array< ModelBookConditionInput | null > | null,
-  not?: ModelBookConditionInput | null,
-  bookDraftId?: ModelIDInput | null,
+export type ModelTeamConditionInput = {
+  name?: ModelStringInput | null,
+  and?: Array< ModelTeamConditionInput | null > | null,
+  or?: Array< ModelTeamConditionInput | null > | null,
+  not?: ModelTeamConditionInput | null,
+  teamProjectId?: ModelIDInput | null,
 };
 
-export type Book = {
-  __typename: "Book",
+export type UpdateTeamInput = {
   id: string,
-  Authors?: ModelBookAuthorConnection | null,
-  Editions?: ModelEditionConnection | null,
-  Draft?: Draft | null,
-  createdAt: string,
-  updatedAt: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
-  bookDraftId?: string | null,
-};
-
-export type ModelBookAuthorConnection = {
-  __typename: "ModelBookAuthorConnection",
-  items:  Array<BookAuthor | null >,
-  nextToken?: string | null,
-  startedAt?: number | null,
-};
-
-export type BookAuthor = {
-  __typename: "BookAuthor",
-  id: string,
-  bookID: string,
-  authorID: string,
-  book: Book,
-  author: Author,
-  createdAt: string,
-  updatedAt: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
-};
-
-export type Author = {
-  __typename: "Author",
-  id: string,
-  books?: ModelBookAuthorConnection | null,
-  createdAt: string,
-  updatedAt: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
-};
-
-export type ModelEditionConnection = {
-  __typename: "ModelEditionConnection",
-  items:  Array<Edition | null >,
-  nextToken?: string | null,
-  startedAt?: number | null,
-};
-
-export type UpdateBookInput = {
-  id: string,
+  name?: string | null,
   _version?: number | null,
-  bookDraftId?: string | null,
+  teamProjectId?: string | null,
 };
 
-export type DeleteBookInput = {
+export type DeleteTeamInput = {
   id: string,
   _version?: number | null,
 };
 
-export type CreateAuthorInput = {
+export type CreateProjectInput = {
   id?: string | null,
+  name: string,
   _version?: number | null,
 };
 
-export type ModelAuthorConditionInput = {
-  and?: Array< ModelAuthorConditionInput | null > | null,
-  or?: Array< ModelAuthorConditionInput | null > | null,
-  not?: ModelAuthorConditionInput | null,
+export type ModelProjectConditionInput = {
+  name?: ModelStringInput | null,
+  and?: Array< ModelProjectConditionInput | null > | null,
+  or?: Array< ModelProjectConditionInput | null > | null,
+  not?: ModelProjectConditionInput | null,
 };
 
-export type UpdateAuthorInput = {
+export type UpdateProjectInput = {
+  id: string,
+  name?: string | null,
+  _version?: number | null,
+};
+
+export type DeleteProjectInput = {
   id: string,
   _version?: number | null,
 };
 
-export type DeleteAuthorInput = {
-  id: string,
-  _version?: number | null,
-};
-
-export type CreateBookAuthorInput = {
-  id?: string | null,
-  bookID: string,
-  authorID: string,
-  _version?: number | null,
-};
-
-export type ModelBookAuthorConditionInput = {
-  bookID?: ModelIDInput | null,
-  authorID?: ModelIDInput | null,
-  and?: Array< ModelBookAuthorConditionInput | null > | null,
-  or?: Array< ModelBookAuthorConditionInput | null > | null,
-  not?: ModelBookAuthorConditionInput | null,
-};
-
-export type UpdateBookAuthorInput = {
-  id: string,
-  bookID?: string | null,
-  authorID?: string | null,
-  _version?: number | null,
-};
-
-export type DeleteBookAuthorInput = {
-  id: string,
-  _version?: number | null,
-};
-
-export type ModelDraftFilterInput = {
+export type ModelMemberFilterInput = {
   id?: ModelIDInput | null,
-  and?: Array< ModelDraftFilterInput | null > | null,
-  or?: Array< ModelDraftFilterInput | null > | null,
-  not?: ModelDraftFilterInput | null,
+  name?: ModelStringInput | null,
+  teamID?: ModelIDInput | null,
+  and?: Array< ModelMemberFilterInput | null > | null,
+  or?: Array< ModelMemberFilterInput | null > | null,
+  not?: ModelMemberFilterInput | null,
 };
 
-export type ModelDraftConnection = {
-  __typename: "ModelDraftConnection",
-  items:  Array<Draft | null >,
+export type ModelTeamFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  and?: Array< ModelTeamFilterInput | null > | null,
+  or?: Array< ModelTeamFilterInput | null > | null,
+  not?: ModelTeamFilterInput | null,
+  teamProjectId?: ModelIDInput | null,
+};
+
+export type ModelTeamConnection = {
+  __typename: "ModelTeamConnection",
+  items:  Array<Team | null >,
   nextToken?: string | null,
   startedAt?: number | null,
 };
 
-export type ModelEditionFilterInput = {
+export type ModelProjectFilterInput = {
   id?: ModelIDInput | null,
-  bookID?: ModelIDInput | null,
-  and?: Array< ModelEditionFilterInput | null > | null,
-  or?: Array< ModelEditionFilterInput | null > | null,
-  not?: ModelEditionFilterInput | null,
+  name?: ModelStringInput | null,
+  and?: Array< ModelProjectFilterInput | null > | null,
+  or?: Array< ModelProjectFilterInput | null > | null,
+  not?: ModelProjectFilterInput | null,
 };
 
-export type ModelBookFilterInput = {
-  id?: ModelIDInput | null,
-  and?: Array< ModelBookFilterInput | null > | null,
-  or?: Array< ModelBookFilterInput | null > | null,
-  not?: ModelBookFilterInput | null,
-  bookDraftId?: ModelIDInput | null,
-};
-
-export type ModelBookConnection = {
-  __typename: "ModelBookConnection",
-  items:  Array<Book | null >,
+export type ModelProjectConnection = {
+  __typename: "ModelProjectConnection",
+  items:  Array<Project | null >,
   nextToken?: string | null,
   startedAt?: number | null,
 };
 
-export type ModelAuthorFilterInput = {
-  id?: ModelIDInput | null,
-  and?: Array< ModelAuthorFilterInput | null > | null,
-  or?: Array< ModelAuthorFilterInput | null > | null,
-  not?: ModelAuthorFilterInput | null,
-};
-
-export type ModelAuthorConnection = {
-  __typename: "ModelAuthorConnection",
-  items:  Array<Author | null >,
-  nextToken?: string | null,
-  startedAt?: number | null,
-};
-
-export type ModelBookAuthorFilterInput = {
-  id?: ModelIDInput | null,
-  bookID?: ModelIDInput | null,
-  authorID?: ModelIDInput | null,
-  and?: Array< ModelBookAuthorFilterInput | null > | null,
-  or?: Array< ModelBookAuthorFilterInput | null > | null,
-  not?: ModelBookAuthorFilterInput | null,
-};
-
-export type ModelSubscriptionDraftFilterInput = {
+export type ModelSubscriptionMemberFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  and?: Array< ModelSubscriptionDraftFilterInput | null > | null,
-  or?: Array< ModelSubscriptionDraftFilterInput | null > | null,
+  name?: ModelSubscriptionStringInput | null,
+  teamID?: ModelSubscriptionIDInput | null,
+  and?: Array< ModelSubscriptionMemberFilterInput | null > | null,
+  or?: Array< ModelSubscriptionMemberFilterInput | null > | null,
 };
 
 export type ModelSubscriptionIDInput = {
@@ -314,260 +244,147 @@ export type ModelSubscriptionIDInput = {
   notIn?: Array< string | null > | null,
 };
 
-export type ModelSubscriptionEditionFilterInput = {
+export type ModelSubscriptionStringInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  in?: Array< string | null > | null,
+  notIn?: Array< string | null > | null,
+};
+
+export type ModelSubscriptionTeamFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  bookID?: ModelSubscriptionIDInput | null,
-  and?: Array< ModelSubscriptionEditionFilterInput | null > | null,
-  or?: Array< ModelSubscriptionEditionFilterInput | null > | null,
+  name?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionTeamFilterInput | null > | null,
+  or?: Array< ModelSubscriptionTeamFilterInput | null > | null,
 };
 
-export type ModelSubscriptionBookFilterInput = {
+export type ModelSubscriptionProjectFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  and?: Array< ModelSubscriptionBookFilterInput | null > | null,
-  or?: Array< ModelSubscriptionBookFilterInput | null > | null,
+  name?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionProjectFilterInput | null > | null,
+  or?: Array< ModelSubscriptionProjectFilterInput | null > | null,
 };
 
-export type ModelSubscriptionAuthorFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  and?: Array< ModelSubscriptionAuthorFilterInput | null > | null,
-  or?: Array< ModelSubscriptionAuthorFilterInput | null > | null,
+export type CreateMemberMutationVariables = {
+  input: CreateMemberInput,
+  condition?: ModelMemberConditionInput | null,
 };
 
-export type ModelSubscriptionBookAuthorFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  bookID?: ModelSubscriptionIDInput | null,
-  authorID?: ModelSubscriptionIDInput | null,
-  and?: Array< ModelSubscriptionBookAuthorFilterInput | null > | null,
-  or?: Array< ModelSubscriptionBookAuthorFilterInput | null > | null,
-};
-
-export type CreateDraftMutationVariables = {
-  input: CreateDraftInput,
-  condition?: ModelDraftConditionInput | null,
-};
-
-export type CreateDraftMutation = {
-  createDraft?:  {
-    __typename: "Draft",
+export type CreateMemberMutation = {
+  createMember?:  {
+    __typename: "Member",
     id: string,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-  } | null,
-};
-
-export type UpdateDraftMutationVariables = {
-  input: UpdateDraftInput,
-  condition?: ModelDraftConditionInput | null,
-};
-
-export type UpdateDraftMutation = {
-  updateDraft?:  {
-    __typename: "Draft",
-    id: string,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-  } | null,
-};
-
-export type DeleteDraftMutationVariables = {
-  input: DeleteDraftInput,
-  condition?: ModelDraftConditionInput | null,
-};
-
-export type DeleteDraftMutation = {
-  deleteDraft?:  {
-    __typename: "Draft",
-    id: string,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-  } | null,
-};
-
-export type CreateEditionMutationVariables = {
-  input: CreateEditionInput,
-  condition?: ModelEditionConditionInput | null,
-};
-
-export type CreateEditionMutation = {
-  createEdition?:  {
-    __typename: "Edition",
-    id: string,
-    bookID: string,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-  } | null,
-};
-
-export type UpdateEditionMutationVariables = {
-  input: UpdateEditionInput,
-  condition?: ModelEditionConditionInput | null,
-};
-
-export type UpdateEditionMutation = {
-  updateEdition?:  {
-    __typename: "Edition",
-    id: string,
-    bookID: string,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-  } | null,
-};
-
-export type DeleteEditionMutationVariables = {
-  input: DeleteEditionInput,
-  condition?: ModelEditionConditionInput | null,
-};
-
-export type DeleteEditionMutation = {
-  deleteEdition?:  {
-    __typename: "Edition",
-    id: string,
-    bookID: string,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-  } | null,
-};
-
-export type CreateBookMutationVariables = {
-  input: CreateBookInput,
-  condition?: ModelBookConditionInput | null,
-};
-
-export type CreateBookMutation = {
-  createBook?:  {
-    __typename: "Book",
-    id: string,
-    Authors?:  {
-      __typename: "ModelBookAuthorConnection",
-      nextToken?: string | null,
-      startedAt?: number | null,
-    } | null,
-    Editions?:  {
-      __typename: "ModelEditionConnection",
-      nextToken?: string | null,
-      startedAt?: number | null,
-    } | null,
-    Draft?:  {
-      __typename: "Draft",
+    name?: string | null,
+    teamID: string,
+    Team?:  {
+      __typename: "Team",
       id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      teamProjectId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type UpdateMemberMutationVariables = {
+  input: UpdateMemberInput,
+  condition?: ModelMemberConditionInput | null,
+};
+
+export type UpdateMemberMutation = {
+  updateMember?:  {
+    __typename: "Member",
+    id: string,
+    name?: string | null,
+    teamID: string,
+    Team?:  {
+      __typename: "Team",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      teamProjectId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type DeleteMemberMutationVariables = {
+  input: DeleteMemberInput,
+  condition?: ModelMemberConditionInput | null,
+};
+
+export type DeleteMemberMutation = {
+  deleteMember?:  {
+    __typename: "Member",
+    id: string,
+    name?: string | null,
+    teamID: string,
+    Team?:  {
+      __typename: "Team",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      teamProjectId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type CreateTeamMutationVariables = {
+  input: CreateTeamInput,
+  condition?: ModelTeamConditionInput | null,
+};
+
+export type CreateTeamMutation = {
+  createTeam?:  {
+    __typename: "Team",
+    id: string,
+    name: string,
+    Project?:  {
+      __typename: "Project",
+      id: string,
+      name: string,
       createdAt: string,
       updatedAt: string,
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
     } | null,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    bookDraftId?: string | null,
-  } | null,
-};
-
-export type UpdateBookMutationVariables = {
-  input: UpdateBookInput,
-  condition?: ModelBookConditionInput | null,
-};
-
-export type UpdateBookMutation = {
-  updateBook?:  {
-    __typename: "Book",
-    id: string,
-    Authors?:  {
-      __typename: "ModelBookAuthorConnection",
-      nextToken?: string | null,
-      startedAt?: number | null,
-    } | null,
-    Editions?:  {
-      __typename: "ModelEditionConnection",
-      nextToken?: string | null,
-      startedAt?: number | null,
-    } | null,
-    Draft?:  {
-      __typename: "Draft",
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    bookDraftId?: string | null,
-  } | null,
-};
-
-export type DeleteBookMutationVariables = {
-  input: DeleteBookInput,
-  condition?: ModelBookConditionInput | null,
-};
-
-export type DeleteBookMutation = {
-  deleteBook?:  {
-    __typename: "Book",
-    id: string,
-    Authors?:  {
-      __typename: "ModelBookAuthorConnection",
-      nextToken?: string | null,
-      startedAt?: number | null,
-    } | null,
-    Editions?:  {
-      __typename: "ModelEditionConnection",
-      nextToken?: string | null,
-      startedAt?: number | null,
-    } | null,
-    Draft?:  {
-      __typename: "Draft",
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    bookDraftId?: string | null,
-  } | null,
-};
-
-export type CreateAuthorMutationVariables = {
-  input: CreateAuthorInput,
-  condition?: ModelAuthorConditionInput | null,
-};
-
-export type CreateAuthorMutation = {
-  createAuthor?:  {
-    __typename: "Author",
-    id: string,
-    books?:  {
-      __typename: "ModelBookAuthorConnection",
+    Members?:  {
+      __typename: "ModelMemberConnection",
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
@@ -576,20 +393,32 @@ export type CreateAuthorMutation = {
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
+    teamProjectId?: string | null,
   } | null,
 };
 
-export type UpdateAuthorMutationVariables = {
-  input: UpdateAuthorInput,
-  condition?: ModelAuthorConditionInput | null,
+export type UpdateTeamMutationVariables = {
+  input: UpdateTeamInput,
+  condition?: ModelTeamConditionInput | null,
 };
 
-export type UpdateAuthorMutation = {
-  updateAuthor?:  {
-    __typename: "Author",
+export type UpdateTeamMutation = {
+  updateTeam?:  {
+    __typename: "Team",
     id: string,
-    books?:  {
-      __typename: "ModelBookAuthorConnection",
+    name: string,
+    Project?:  {
+      __typename: "Project",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null,
+    Members?:  {
+      __typename: "ModelMemberConnection",
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
@@ -598,20 +427,32 @@ export type UpdateAuthorMutation = {
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
+    teamProjectId?: string | null,
   } | null,
 };
 
-export type DeleteAuthorMutationVariables = {
-  input: DeleteAuthorInput,
-  condition?: ModelAuthorConditionInput | null,
+export type DeleteTeamMutationVariables = {
+  input: DeleteTeamInput,
+  condition?: ModelTeamConditionInput | null,
 };
 
-export type DeleteAuthorMutation = {
-  deleteAuthor?:  {
-    __typename: "Author",
+export type DeleteTeamMutation = {
+  deleteTeam?:  {
+    __typename: "Team",
     id: string,
-    books?:  {
-      __typename: "ModelBookAuthorConnection",
+    name: string,
+    Project?:  {
+      __typename: "Project",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null,
+    Members?:  {
+      __typename: "ModelMemberConnection",
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
@@ -620,39 +461,20 @@ export type DeleteAuthorMutation = {
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
+    teamProjectId?: string | null,
   } | null,
 };
 
-export type CreateBookAuthorMutationVariables = {
-  input: CreateBookAuthorInput,
-  condition?: ModelBookAuthorConditionInput | null,
+export type CreateProjectMutationVariables = {
+  input: CreateProjectInput,
+  condition?: ModelProjectConditionInput | null,
 };
 
-export type CreateBookAuthorMutation = {
-  createBookAuthor?:  {
-    __typename: "BookAuthor",
+export type CreateProjectMutation = {
+  createProject?:  {
+    __typename: "Project",
     id: string,
-    bookID: string,
-    authorID: string,
-    book:  {
-      __typename: "Book",
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      bookDraftId?: string | null,
-    },
-    author:  {
-      __typename: "Author",
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    },
+    name: string,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -661,36 +483,16 @@ export type CreateBookAuthorMutation = {
   } | null,
 };
 
-export type UpdateBookAuthorMutationVariables = {
-  input: UpdateBookAuthorInput,
-  condition?: ModelBookAuthorConditionInput | null,
+export type UpdateProjectMutationVariables = {
+  input: UpdateProjectInput,
+  condition?: ModelProjectConditionInput | null,
 };
 
-export type UpdateBookAuthorMutation = {
-  updateBookAuthor?:  {
-    __typename: "BookAuthor",
+export type UpdateProjectMutation = {
+  updateProject?:  {
+    __typename: "Project",
     id: string,
-    bookID: string,
-    authorID: string,
-    book:  {
-      __typename: "Book",
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      bookDraftId?: string | null,
-    },
-    author:  {
-      __typename: "Author",
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    },
+    name: string,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -699,36 +501,16 @@ export type UpdateBookAuthorMutation = {
   } | null,
 };
 
-export type DeleteBookAuthorMutationVariables = {
-  input: DeleteBookAuthorInput,
-  condition?: ModelBookAuthorConditionInput | null,
+export type DeleteProjectMutationVariables = {
+  input: DeleteProjectInput,
+  condition?: ModelProjectConditionInput | null,
 };
 
-export type DeleteBookAuthorMutation = {
-  deleteBookAuthor?:  {
-    __typename: "BookAuthor",
+export type DeleteProjectMutation = {
+  deleteProject?:  {
+    __typename: "Project",
     id: string,
-    bookID: string,
-    authorID: string,
-    book:  {
-      __typename: "Book",
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      bookDraftId?: string | null,
-    },
-    author:  {
-      __typename: "Author",
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    },
+    name: string,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -737,14 +519,27 @@ export type DeleteBookAuthorMutation = {
   } | null,
 };
 
-export type GetDraftQueryVariables = {
+export type GetMemberQueryVariables = {
   id: string,
 };
 
-export type GetDraftQuery = {
-  getDraft?:  {
-    __typename: "Draft",
+export type GetMemberQuery = {
+  getMember?:  {
+    __typename: "Member",
     id: string,
+    name?: string | null,
+    teamID: string,
+    Team?:  {
+      __typename: "Team",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      teamProjectId?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -753,18 +548,20 @@ export type GetDraftQuery = {
   } | null,
 };
 
-export type ListDraftsQueryVariables = {
-  filter?: ModelDraftFilterInput | null,
+export type ListMembersQueryVariables = {
+  filter?: ModelMemberFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListDraftsQuery = {
-  listDrafts?:  {
-    __typename: "ModelDraftConnection",
+export type ListMembersQuery = {
+  listMembers?:  {
+    __typename: "ModelMemberConnection",
     items:  Array< {
-      __typename: "Draft",
+      __typename: "Member",
       id: string,
+      name?: string | null,
+      teamID: string,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -776,19 +573,21 @@ export type ListDraftsQuery = {
   } | null,
 };
 
-export type SyncDraftsQueryVariables = {
-  filter?: ModelDraftFilterInput | null,
+export type SyncMembersQueryVariables = {
+  filter?: ModelMemberFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
   lastSync?: number | null,
 };
 
-export type SyncDraftsQuery = {
-  syncDrafts?:  {
-    __typename: "ModelDraftConnection",
+export type SyncMembersQuery = {
+  syncMembers?:  {
+    __typename: "ModelMemberConnection",
     items:  Array< {
-      __typename: "Draft",
+      __typename: "Member",
       id: string,
+      name?: string | null,
+      teamID: string,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -800,190 +599,145 @@ export type SyncDraftsQuery = {
   } | null,
 };
 
-export type GetEditionQueryVariables = {
+export type GetTeamQueryVariables = {
   id: string,
 };
 
-export type GetEditionQuery = {
-  getEdition?:  {
-    __typename: "Edition",
+export type GetTeamQuery = {
+  getTeam?:  {
+    __typename: "Team",
     id: string,
-    bookID: string,
+    name: string,
+    Project?:  {
+      __typename: "Project",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null,
+    Members?:  {
+      __typename: "ModelMemberConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
+    teamProjectId?: string | null,
   } | null,
 };
 
-export type ListEditionsQueryVariables = {
-  filter?: ModelEditionFilterInput | null,
+export type ListTeamsQueryVariables = {
+  filter?: ModelTeamFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListEditionsQuery = {
-  listEditions?:  {
-    __typename: "ModelEditionConnection",
+export type ListTeamsQuery = {
+  listTeams?:  {
+    __typename: "ModelTeamConnection",
     items:  Array< {
-      __typename: "Edition",
+      __typename: "Team",
       id: string,
-      bookID: string,
+      name: string,
       createdAt: string,
       updatedAt: string,
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
+      teamProjectId?: string | null,
     } | null >,
     nextToken?: string | null,
     startedAt?: number | null,
   } | null,
 };
 
-export type SyncEditionsQueryVariables = {
-  filter?: ModelEditionFilterInput | null,
+export type SyncTeamsQueryVariables = {
+  filter?: ModelTeamFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
   lastSync?: number | null,
 };
 
-export type SyncEditionsQuery = {
-  syncEditions?:  {
-    __typename: "ModelEditionConnection",
+export type SyncTeamsQuery = {
+  syncTeams?:  {
+    __typename: "ModelTeamConnection",
     items:  Array< {
-      __typename: "Edition",
+      __typename: "Team",
       id: string,
-      bookID: string,
+      name: string,
       createdAt: string,
       updatedAt: string,
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
+      teamProjectId?: string | null,
     } | null >,
     nextToken?: string | null,
     startedAt?: number | null,
   } | null,
 };
 
-export type GetBookQueryVariables = {
+export type GetProjectQueryVariables = {
   id: string,
 };
 
-export type GetBookQuery = {
-  getBook?:  {
-    __typename: "Book",
+export type GetProjectQuery = {
+  getProject?:  {
+    __typename: "Project",
     id: string,
-    Authors?:  {
-      __typename: "ModelBookAuthorConnection",
-      nextToken?: string | null,
-      startedAt?: number | null,
-    } | null,
-    Editions?:  {
-      __typename: "ModelEditionConnection",
-      nextToken?: string | null,
-      startedAt?: number | null,
-    } | null,
-    Draft?:  {
-      __typename: "Draft",
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null,
+    name: string,
     createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
-    bookDraftId?: string | null,
   } | null,
 };
 
-export type ListBooksQueryVariables = {
-  filter?: ModelBookFilterInput | null,
+export type ListProjectsQueryVariables = {
+  filter?: ModelProjectFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListBooksQuery = {
-  listBooks?:  {
-    __typename: "ModelBookConnection",
+export type ListProjectsQuery = {
+  listProjects?:  {
+    __typename: "ModelProjectConnection",
     items:  Array< {
-      __typename: "Book",
+      __typename: "Project",
       id: string,
+      name: string,
       createdAt: string,
       updatedAt: string,
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
-      bookDraftId?: string | null,
     } | null >,
     nextToken?: string | null,
     startedAt?: number | null,
   } | null,
 };
 
-export type SyncBooksQueryVariables = {
-  filter?: ModelBookFilterInput | null,
+export type SyncProjectsQueryVariables = {
+  filter?: ModelProjectFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
   lastSync?: number | null,
 };
 
-export type SyncBooksQuery = {
-  syncBooks?:  {
-    __typename: "ModelBookConnection",
+export type SyncProjectsQuery = {
+  syncProjects?:  {
+    __typename: "ModelProjectConnection",
     items:  Array< {
-      __typename: "Book",
+      __typename: "Project",
       id: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      bookDraftId?: string | null,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type GetAuthorQueryVariables = {
-  id: string,
-};
-
-export type GetAuthorQuery = {
-  getAuthor?:  {
-    __typename: "Author",
-    id: string,
-    books?:  {
-      __typename: "ModelBookAuthorConnection",
-      nextToken?: string | null,
-      startedAt?: number | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-  } | null,
-};
-
-export type ListAuthorsQueryVariables = {
-  filter?: ModelAuthorFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListAuthorsQuery = {
-  listAuthors?:  {
-    __typename: "ModelAuthorConnection",
-    items:  Array< {
-      __typename: "Author",
-      id: string,
+      name: string,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -995,335 +749,114 @@ export type ListAuthorsQuery = {
   } | null,
 };
 
-export type SyncAuthorsQueryVariables = {
-  filter?: ModelAuthorFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
+export type OnCreateMemberSubscriptionVariables = {
+  filter?: ModelSubscriptionMemberFilterInput | null,
 };
 
-export type SyncAuthorsQuery = {
-  syncAuthors?:  {
-    __typename: "ModelAuthorConnection",
-    items:  Array< {
-      __typename: "Author",
+export type OnCreateMemberSubscription = {
+  onCreateMember?:  {
+    __typename: "Member",
+    id: string,
+    name?: string | null,
+    teamID: string,
+    Team?:  {
+      __typename: "Team",
       id: string,
+      name: string,
       createdAt: string,
       updatedAt: string,
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type GetBookAuthorQueryVariables = {
-  id: string,
-};
-
-export type GetBookAuthorQuery = {
-  getBookAuthor?:  {
-    __typename: "BookAuthor",
-    id: string,
-    bookID: string,
-    authorID: string,
-    book:  {
-      __typename: "Book",
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      bookDraftId?: string | null,
-    },
-    author:  {
-      __typename: "Author",
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    },
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-  } | null,
-};
-
-export type ListBookAuthorsQueryVariables = {
-  filter?: ModelBookAuthorFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListBookAuthorsQuery = {
-  listBookAuthors?:  {
-    __typename: "ModelBookAuthorConnection",
-    items:  Array< {
-      __typename: "BookAuthor",
-      id: string,
-      bookID: string,
-      authorID: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncBookAuthorsQueryVariables = {
-  filter?: ModelBookAuthorFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncBookAuthorsQuery = {
-  syncBookAuthors?:  {
-    __typename: "ModelBookAuthorConnection",
-    items:  Array< {
-      __typename: "BookAuthor",
-      id: string,
-      bookID: string,
-      authorID: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type OnCreateDraftSubscriptionVariables = {
-  filter?: ModelSubscriptionDraftFilterInput | null,
-};
-
-export type OnCreateDraftSubscription = {
-  onCreateDraft?:  {
-    __typename: "Draft",
-    id: string,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-  } | null,
-};
-
-export type OnUpdateDraftSubscriptionVariables = {
-  filter?: ModelSubscriptionDraftFilterInput | null,
-};
-
-export type OnUpdateDraftSubscription = {
-  onUpdateDraft?:  {
-    __typename: "Draft",
-    id: string,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-  } | null,
-};
-
-export type OnDeleteDraftSubscriptionVariables = {
-  filter?: ModelSubscriptionDraftFilterInput | null,
-};
-
-export type OnDeleteDraftSubscription = {
-  onDeleteDraft?:  {
-    __typename: "Draft",
-    id: string,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-  } | null,
-};
-
-export type OnCreateEditionSubscriptionVariables = {
-  filter?: ModelSubscriptionEditionFilterInput | null,
-};
-
-export type OnCreateEditionSubscription = {
-  onCreateEdition?:  {
-    __typename: "Edition",
-    id: string,
-    bookID: string,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-  } | null,
-};
-
-export type OnUpdateEditionSubscriptionVariables = {
-  filter?: ModelSubscriptionEditionFilterInput | null,
-};
-
-export type OnUpdateEditionSubscription = {
-  onUpdateEdition?:  {
-    __typename: "Edition",
-    id: string,
-    bookID: string,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-  } | null,
-};
-
-export type OnDeleteEditionSubscriptionVariables = {
-  filter?: ModelSubscriptionEditionFilterInput | null,
-};
-
-export type OnDeleteEditionSubscription = {
-  onDeleteEdition?:  {
-    __typename: "Edition",
-    id: string,
-    bookID: string,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-  } | null,
-};
-
-export type OnCreateBookSubscriptionVariables = {
-  filter?: ModelSubscriptionBookFilterInput | null,
-};
-
-export type OnCreateBookSubscription = {
-  onCreateBook?:  {
-    __typename: "Book",
-    id: string,
-    Authors?:  {
-      __typename: "ModelBookAuthorConnection",
-      nextToken?: string | null,
-      startedAt?: number | null,
+      teamProjectId?: string | null,
     } | null,
-    Editions?:  {
-      __typename: "ModelEditionConnection",
-      nextToken?: string | null,
-      startedAt?: number | null,
-    } | null,
-    Draft?:  {
-      __typename: "Draft",
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnUpdateMemberSubscriptionVariables = {
+  filter?: ModelSubscriptionMemberFilterInput | null,
+};
+
+export type OnUpdateMemberSubscription = {
+  onUpdateMember?:  {
+    __typename: "Member",
+    id: string,
+    name?: string | null,
+    teamID: string,
+    Team?:  {
+      __typename: "Team",
       id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      teamProjectId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnDeleteMemberSubscriptionVariables = {
+  filter?: ModelSubscriptionMemberFilterInput | null,
+};
+
+export type OnDeleteMemberSubscription = {
+  onDeleteMember?:  {
+    __typename: "Member",
+    id: string,
+    name?: string | null,
+    teamID: string,
+    Team?:  {
+      __typename: "Team",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      teamProjectId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnCreateTeamSubscriptionVariables = {
+  filter?: ModelSubscriptionTeamFilterInput | null,
+};
+
+export type OnCreateTeamSubscription = {
+  onCreateTeam?:  {
+    __typename: "Team",
+    id: string,
+    name: string,
+    Project?:  {
+      __typename: "Project",
+      id: string,
+      name: string,
       createdAt: string,
       updatedAt: string,
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
     } | null,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    bookDraftId?: string | null,
-  } | null,
-};
-
-export type OnUpdateBookSubscriptionVariables = {
-  filter?: ModelSubscriptionBookFilterInput | null,
-};
-
-export type OnUpdateBookSubscription = {
-  onUpdateBook?:  {
-    __typename: "Book",
-    id: string,
-    Authors?:  {
-      __typename: "ModelBookAuthorConnection",
-      nextToken?: string | null,
-      startedAt?: number | null,
-    } | null,
-    Editions?:  {
-      __typename: "ModelEditionConnection",
-      nextToken?: string | null,
-      startedAt?: number | null,
-    } | null,
-    Draft?:  {
-      __typename: "Draft",
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    bookDraftId?: string | null,
-  } | null,
-};
-
-export type OnDeleteBookSubscriptionVariables = {
-  filter?: ModelSubscriptionBookFilterInput | null,
-};
-
-export type OnDeleteBookSubscription = {
-  onDeleteBook?:  {
-    __typename: "Book",
-    id: string,
-    Authors?:  {
-      __typename: "ModelBookAuthorConnection",
-      nextToken?: string | null,
-      startedAt?: number | null,
-    } | null,
-    Editions?:  {
-      __typename: "ModelEditionConnection",
-      nextToken?: string | null,
-      startedAt?: number | null,
-    } | null,
-    Draft?:  {
-      __typename: "Draft",
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    bookDraftId?: string | null,
-  } | null,
-};
-
-export type OnCreateAuthorSubscriptionVariables = {
-  filter?: ModelSubscriptionAuthorFilterInput | null,
-};
-
-export type OnCreateAuthorSubscription = {
-  onCreateAuthor?:  {
-    __typename: "Author",
-    id: string,
-    books?:  {
-      __typename: "ModelBookAuthorConnection",
+    Members?:  {
+      __typename: "ModelMemberConnection",
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
@@ -1332,19 +865,31 @@ export type OnCreateAuthorSubscription = {
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
+    teamProjectId?: string | null,
   } | null,
 };
 
-export type OnUpdateAuthorSubscriptionVariables = {
-  filter?: ModelSubscriptionAuthorFilterInput | null,
+export type OnUpdateTeamSubscriptionVariables = {
+  filter?: ModelSubscriptionTeamFilterInput | null,
 };
 
-export type OnUpdateAuthorSubscription = {
-  onUpdateAuthor?:  {
-    __typename: "Author",
+export type OnUpdateTeamSubscription = {
+  onUpdateTeam?:  {
+    __typename: "Team",
     id: string,
-    books?:  {
-      __typename: "ModelBookAuthorConnection",
+    name: string,
+    Project?:  {
+      __typename: "Project",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null,
+    Members?:  {
+      __typename: "ModelMemberConnection",
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
@@ -1353,19 +898,31 @@ export type OnUpdateAuthorSubscription = {
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
+    teamProjectId?: string | null,
   } | null,
 };
 
-export type OnDeleteAuthorSubscriptionVariables = {
-  filter?: ModelSubscriptionAuthorFilterInput | null,
+export type OnDeleteTeamSubscriptionVariables = {
+  filter?: ModelSubscriptionTeamFilterInput | null,
 };
 
-export type OnDeleteAuthorSubscription = {
-  onDeleteAuthor?:  {
-    __typename: "Author",
+export type OnDeleteTeamSubscription = {
+  onDeleteTeam?:  {
+    __typename: "Team",
     id: string,
-    books?:  {
-      __typename: "ModelBookAuthorConnection",
+    name: string,
+    Project?:  {
+      __typename: "Project",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null,
+    Members?:  {
+      __typename: "ModelMemberConnection",
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
@@ -1374,38 +931,19 @@ export type OnDeleteAuthorSubscription = {
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
+    teamProjectId?: string | null,
   } | null,
 };
 
-export type OnCreateBookAuthorSubscriptionVariables = {
-  filter?: ModelSubscriptionBookAuthorFilterInput | null,
+export type OnCreateProjectSubscriptionVariables = {
+  filter?: ModelSubscriptionProjectFilterInput | null,
 };
 
-export type OnCreateBookAuthorSubscription = {
-  onCreateBookAuthor?:  {
-    __typename: "BookAuthor",
+export type OnCreateProjectSubscription = {
+  onCreateProject?:  {
+    __typename: "Project",
     id: string,
-    bookID: string,
-    authorID: string,
-    book:  {
-      __typename: "Book",
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      bookDraftId?: string | null,
-    },
-    author:  {
-      __typename: "Author",
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    },
+    name: string,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -1414,35 +952,15 @@ export type OnCreateBookAuthorSubscription = {
   } | null,
 };
 
-export type OnUpdateBookAuthorSubscriptionVariables = {
-  filter?: ModelSubscriptionBookAuthorFilterInput | null,
+export type OnUpdateProjectSubscriptionVariables = {
+  filter?: ModelSubscriptionProjectFilterInput | null,
 };
 
-export type OnUpdateBookAuthorSubscription = {
-  onUpdateBookAuthor?:  {
-    __typename: "BookAuthor",
+export type OnUpdateProjectSubscription = {
+  onUpdateProject?:  {
+    __typename: "Project",
     id: string,
-    bookID: string,
-    authorID: string,
-    book:  {
-      __typename: "Book",
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      bookDraftId?: string | null,
-    },
-    author:  {
-      __typename: "Author",
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    },
+    name: string,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -1451,35 +969,15 @@ export type OnUpdateBookAuthorSubscription = {
   } | null,
 };
 
-export type OnDeleteBookAuthorSubscriptionVariables = {
-  filter?: ModelSubscriptionBookAuthorFilterInput | null,
+export type OnDeleteProjectSubscriptionVariables = {
+  filter?: ModelSubscriptionProjectFilterInput | null,
 };
 
-export type OnDeleteBookAuthorSubscription = {
-  onDeleteBookAuthor?:  {
-    __typename: "BookAuthor",
+export type OnDeleteProjectSubscription = {
+  onDeleteProject?:  {
+    __typename: "Project",
     id: string,
-    bookID: string,
-    authorID: string,
-    book:  {
-      __typename: "Book",
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      bookDraftId?: string | null,
-    },
-    author:  {
-      __typename: "Author",
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    },
+    name: string,
     createdAt: string,
     updatedAt: string,
     _version: number,

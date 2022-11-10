@@ -2,10 +2,22 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getDraft = /* GraphQL */ `
-  query GetDraft($id: ID!) {
-    getDraft(id: $id) {
+export const getMember = /* GraphQL */ `
+  query GetMember($id: ID!) {
+    getMember(id: $id) {
       id
+      name
+      teamID
+      Team {
+        id
+        name
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        teamProjectId
+      }
       createdAt
       updatedAt
       _version
@@ -14,15 +26,17 @@ export const getDraft = /* GraphQL */ `
     }
   }
 `;
-export const listDrafts = /* GraphQL */ `
-  query ListDrafts(
-    $filter: ModelDraftFilterInput
+export const listMembers = /* GraphQL */ `
+  query ListMembers(
+    $filter: ModelMemberFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listDrafts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listMembers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        name
+        teamID
         createdAt
         updatedAt
         _version
@@ -34,14 +48,14 @@ export const listDrafts = /* GraphQL */ `
     }
   }
 `;
-export const syncDrafts = /* GraphQL */ `
-  query SyncDrafts(
-    $filter: ModelDraftFilterInput
+export const syncMembers = /* GraphQL */ `
+  query SyncMembers(
+    $filter: ModelMemberFilterInput
     $limit: Int
     $nextToken: String
     $lastSync: AWSTimestamp
   ) {
-    syncDrafts(
+    syncMembers(
       filter: $filter
       limit: $limit
       nextToken: $nextToken
@@ -49,6 +63,8 @@ export const syncDrafts = /* GraphQL */ `
     ) {
       items {
         id
+        name
+        teamID
         createdAt
         updatedAt
         _version
@@ -60,149 +76,21 @@ export const syncDrafts = /* GraphQL */ `
     }
   }
 `;
-export const getEdition = /* GraphQL */ `
-  query GetEdition($id: ID!) {
-    getEdition(id: $id) {
+export const getTeam = /* GraphQL */ `
+  query GetTeam($id: ID!) {
+    getTeam(id: $id) {
       id
-      bookID
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const listEditions = /* GraphQL */ `
-  query ListEditions(
-    $filter: ModelEditionFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listEditions(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
+      name
+      Project {
         id
-        bookID
+        name
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
       }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncEditions = /* GraphQL */ `
-  query SyncEditions(
-    $filter: ModelEditionFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncEditions(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        bookID
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const getBook = /* GraphQL */ `
-  query GetBook($id: ID!) {
-    getBook(id: $id) {
-      id
-      Authors {
-        nextToken
-        startedAt
-      }
-      Editions {
-        nextToken
-        startedAt
-      }
-      Draft {
-        id
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      bookDraftId
-    }
-  }
-`;
-export const listBooks = /* GraphQL */ `
-  query ListBooks(
-    $filter: ModelBookFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listBooks(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        bookDraftId
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncBooks = /* GraphQL */ `
-  query SyncBooks(
-    $filter: ModelBookFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncBooks(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        bookDraftId
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const getAuthor = /* GraphQL */ `
-  query GetAuthor($id: ID!) {
-    getAuthor(id: $id) {
-      id
-      books {
+      Members {
         nextToken
         startedAt
       }
@@ -211,37 +99,40 @@ export const getAuthor = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      teamProjectId
     }
   }
 `;
-export const listAuthors = /* GraphQL */ `
-  query ListAuthors(
-    $filter: ModelAuthorFilterInput
+export const listTeams = /* GraphQL */ `
+  query ListTeams(
+    $filter: ModelTeamFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listAuthors(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listTeams(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        name
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
+        teamProjectId
       }
       nextToken
       startedAt
     }
   }
 `;
-export const syncAuthors = /* GraphQL */ `
-  query SyncAuthors(
-    $filter: ModelAuthorFilterInput
+export const syncTeams = /* GraphQL */ `
+  query SyncTeams(
+    $filter: ModelTeamFilterInput
     $limit: Int
     $nextToken: String
     $lastSync: AWSTimestamp
   ) {
-    syncAuthors(
+    syncTeams(
       filter: $filter
       limit: $limit
       nextToken: $nextToken
@@ -249,40 +140,24 @@ export const syncAuthors = /* GraphQL */ `
     ) {
       items {
         id
+        name
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
+        teamProjectId
       }
       nextToken
       startedAt
     }
   }
 `;
-export const getBookAuthor = /* GraphQL */ `
-  query GetBookAuthor($id: ID!) {
-    getBookAuthor(id: $id) {
+export const getProject = /* GraphQL */ `
+  query GetProject($id: ID!) {
+    getProject(id: $id) {
       id
-      bookID
-      authorID
-      book {
-        id
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        bookDraftId
-      }
-      author {
-        id
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
+      name
       createdAt
       updatedAt
       _version
@@ -291,17 +166,16 @@ export const getBookAuthor = /* GraphQL */ `
     }
   }
 `;
-export const listBookAuthors = /* GraphQL */ `
-  query ListBookAuthors(
-    $filter: ModelBookAuthorFilterInput
+export const listProjects = /* GraphQL */ `
+  query ListProjects(
+    $filter: ModelProjectFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listBookAuthors(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listProjects(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        bookID
-        authorID
+        name
         createdAt
         updatedAt
         _version
@@ -313,14 +187,14 @@ export const listBookAuthors = /* GraphQL */ `
     }
   }
 `;
-export const syncBookAuthors = /* GraphQL */ `
-  query SyncBookAuthors(
-    $filter: ModelBookAuthorFilterInput
+export const syncProjects = /* GraphQL */ `
+  query SyncProjects(
+    $filter: ModelProjectFilterInput
     $limit: Int
     $nextToken: String
     $lastSync: AWSTimestamp
   ) {
-    syncBookAuthors(
+    syncProjects(
       filter: $filter
       limit: $limit
       nextToken: $nextToken
@@ -328,8 +202,7 @@ export const syncBookAuthors = /* GraphQL */ `
     ) {
       items {
         id
-        bookID
-        authorID
+        name
         createdAt
         updatedAt
         _version

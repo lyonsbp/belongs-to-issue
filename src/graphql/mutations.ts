@@ -2,203 +2,105 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createDraft = /* GraphQL */ `
-  mutation CreateDraft(
-    $input: CreateDraftInput!
-    $condition: ModelDraftConditionInput
+export const createMember = /* GraphQL */ `
+  mutation CreateMember(
+    $input: CreateMemberInput!
+    $condition: ModelMemberConditionInput
   ) {
-    createDraft(input: $input, condition: $condition) {
+    createMember(input: $input, condition: $condition) {
       id
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const updateDraft = /* GraphQL */ `
-  mutation UpdateDraft(
-    $input: UpdateDraftInput!
-    $condition: ModelDraftConditionInput
-  ) {
-    updateDraft(input: $input, condition: $condition) {
-      id
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const deleteDraft = /* GraphQL */ `
-  mutation DeleteDraft(
-    $input: DeleteDraftInput!
-    $condition: ModelDraftConditionInput
-  ) {
-    deleteDraft(input: $input, condition: $condition) {
-      id
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const createEdition = /* GraphQL */ `
-  mutation CreateEdition(
-    $input: CreateEditionInput!
-    $condition: ModelEditionConditionInput
-  ) {
-    createEdition(input: $input, condition: $condition) {
-      id
-      bookID
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const updateEdition = /* GraphQL */ `
-  mutation UpdateEdition(
-    $input: UpdateEditionInput!
-    $condition: ModelEditionConditionInput
-  ) {
-    updateEdition(input: $input, condition: $condition) {
-      id
-      bookID
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const deleteEdition = /* GraphQL */ `
-  mutation DeleteEdition(
-    $input: DeleteEditionInput!
-    $condition: ModelEditionConditionInput
-  ) {
-    deleteEdition(input: $input, condition: $condition) {
-      id
-      bookID
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const createBook = /* GraphQL */ `
-  mutation CreateBook(
-    $input: CreateBookInput!
-    $condition: ModelBookConditionInput
-  ) {
-    createBook(input: $input, condition: $condition) {
-      id
-      Authors {
-        nextToken
-        startedAt
-      }
-      Editions {
-        nextToken
-        startedAt
-      }
-      Draft {
+      name
+      teamID
+      Team {
         id
+        name
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        teamProjectId
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const updateMember = /* GraphQL */ `
+  mutation UpdateMember(
+    $input: UpdateMemberInput!
+    $condition: ModelMemberConditionInput
+  ) {
+    updateMember(input: $input, condition: $condition) {
+      id
+      name
+      teamID
+      Team {
+        id
+        name
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        teamProjectId
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const deleteMember = /* GraphQL */ `
+  mutation DeleteMember(
+    $input: DeleteMemberInput!
+    $condition: ModelMemberConditionInput
+  ) {
+    deleteMember(input: $input, condition: $condition) {
+      id
+      name
+      teamID
+      Team {
+        id
+        name
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        teamProjectId
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const createTeam = /* GraphQL */ `
+  mutation CreateTeam(
+    $input: CreateTeamInput!
+    $condition: ModelTeamConditionInput
+  ) {
+    createTeam(input: $input, condition: $condition) {
+      id
+      name
+      Project {
+        id
+        name
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
       }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      bookDraftId
-    }
-  }
-`;
-export const updateBook = /* GraphQL */ `
-  mutation UpdateBook(
-    $input: UpdateBookInput!
-    $condition: ModelBookConditionInput
-  ) {
-    updateBook(input: $input, condition: $condition) {
-      id
-      Authors {
-        nextToken
-        startedAt
-      }
-      Editions {
-        nextToken
-        startedAt
-      }
-      Draft {
-        id
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      bookDraftId
-    }
-  }
-`;
-export const deleteBook = /* GraphQL */ `
-  mutation DeleteBook(
-    $input: DeleteBookInput!
-    $condition: ModelBookConditionInput
-  ) {
-    deleteBook(input: $input, condition: $condition) {
-      id
-      Authors {
-        nextToken
-        startedAt
-      }
-      Editions {
-        nextToken
-        startedAt
-      }
-      Draft {
-        id
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      bookDraftId
-    }
-  }
-`;
-export const createAuthor = /* GraphQL */ `
-  mutation CreateAuthor(
-    $input: CreateAuthorInput!
-    $condition: ModelAuthorConditionInput
-  ) {
-    createAuthor(input: $input, condition: $condition) {
-      id
-      books {
+      Members {
         nextToken
         startedAt
       }
@@ -207,17 +109,28 @@ export const createAuthor = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      teamProjectId
     }
   }
 `;
-export const updateAuthor = /* GraphQL */ `
-  mutation UpdateAuthor(
-    $input: UpdateAuthorInput!
-    $condition: ModelAuthorConditionInput
+export const updateTeam = /* GraphQL */ `
+  mutation UpdateTeam(
+    $input: UpdateTeamInput!
+    $condition: ModelTeamConditionInput
   ) {
-    updateAuthor(input: $input, condition: $condition) {
+    updateTeam(input: $input, condition: $condition) {
       id
-      books {
+      name
+      Project {
+        id
+        name
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      Members {
         nextToken
         startedAt
       }
@@ -226,17 +139,28 @@ export const updateAuthor = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      teamProjectId
     }
   }
 `;
-export const deleteAuthor = /* GraphQL */ `
-  mutation DeleteAuthor(
-    $input: DeleteAuthorInput!
-    $condition: ModelAuthorConditionInput
+export const deleteTeam = /* GraphQL */ `
+  mutation DeleteTeam(
+    $input: DeleteTeamInput!
+    $condition: ModelTeamConditionInput
   ) {
-    deleteAuthor(input: $input, condition: $condition) {
+    deleteTeam(input: $input, condition: $condition) {
       id
-      books {
+      name
+      Project {
+        id
+        name
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      Members {
         nextToken
         startedAt
       }
@@ -245,35 +169,18 @@ export const deleteAuthor = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      teamProjectId
     }
   }
 `;
-export const createBookAuthor = /* GraphQL */ `
-  mutation CreateBookAuthor(
-    $input: CreateBookAuthorInput!
-    $condition: ModelBookAuthorConditionInput
+export const createProject = /* GraphQL */ `
+  mutation CreateProject(
+    $input: CreateProjectInput!
+    $condition: ModelProjectConditionInput
   ) {
-    createBookAuthor(input: $input, condition: $condition) {
+    createProject(input: $input, condition: $condition) {
       id
-      bookID
-      authorID
-      book {
-        id
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        bookDraftId
-      }
-      author {
-        id
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
+      name
       createdAt
       updatedAt
       _version
@@ -282,32 +189,14 @@ export const createBookAuthor = /* GraphQL */ `
     }
   }
 `;
-export const updateBookAuthor = /* GraphQL */ `
-  mutation UpdateBookAuthor(
-    $input: UpdateBookAuthorInput!
-    $condition: ModelBookAuthorConditionInput
+export const updateProject = /* GraphQL */ `
+  mutation UpdateProject(
+    $input: UpdateProjectInput!
+    $condition: ModelProjectConditionInput
   ) {
-    updateBookAuthor(input: $input, condition: $condition) {
+    updateProject(input: $input, condition: $condition) {
       id
-      bookID
-      authorID
-      book {
-        id
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        bookDraftId
-      }
-      author {
-        id
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
+      name
       createdAt
       updatedAt
       _version
@@ -316,32 +205,14 @@ export const updateBookAuthor = /* GraphQL */ `
     }
   }
 `;
-export const deleteBookAuthor = /* GraphQL */ `
-  mutation DeleteBookAuthor(
-    $input: DeleteBookAuthorInput!
-    $condition: ModelBookAuthorConditionInput
+export const deleteProject = /* GraphQL */ `
+  mutation DeleteProject(
+    $input: DeleteProjectInput!
+    $condition: ModelProjectConditionInput
   ) {
-    deleteBookAuthor(input: $input, condition: $condition) {
+    deleteProject(input: $input, condition: $condition) {
       id
-      bookID
-      authorID
-      book {
-        id
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        bookDraftId
-      }
-      author {
-        id
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
+      name
       createdAt
       updatedAt
       _version

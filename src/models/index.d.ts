@@ -18,6 +18,7 @@ type EagerMember = {
   readonly id: string;
   readonly name?: string | null;
   readonly teamID: string;
+  readonly Team?: Team | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -26,6 +27,7 @@ type LazyMember = {
   readonly id: string;
   readonly name?: string | null;
   readonly teamID: string;
+  readonly Team: AsyncItem<Team | undefined>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -65,6 +67,7 @@ export declare const Team: (new (init: ModelInit<Team, TeamMetaData>) => Team) &
 type EagerProject = {
   readonly id: string;
   readonly name: string;
+  readonly Team?: Team | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -72,6 +75,7 @@ type EagerProject = {
 type LazyProject = {
   readonly id: string;
   readonly name: string;
+  readonly Team: AsyncItem<Team | undefined>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
