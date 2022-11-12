@@ -69,15 +69,74 @@ function ArrayField({
       setIsEditing(false);
     }
   };
+  const arraySection = (
+    <React.Fragment>
+      <Text>{label}</Text>
+
+      {!!items?.length && (
+        <ScrollView height="inherit" width="inherit" maxHeight={"7rem"}>
+          {items.map((value, index) => {
+            return (
+              <Badge
+                key={index}
+                style={{
+                  cursor: "pointer",
+                  alignItems: "center",
+                  marginRight: 3,
+                  marginTop: 3,
+                  backgroundColor: index === selectedBadgeIndex ? "#B8CEF9" : ""
+                }}
+                onClick={() => {
+                  setSelectedBadgeIndex(index);
+                  // populate display value
+                  setFieldValue(
+                    getBadgeText ? getBadgeText(items[index]) : items[index]
+                  );
+                  setIsEditing(true);
+                }}
+              >
+                {
+                  // custom badge text
+                  getBadgeText ? getBadgeText(value) : value.toString()
+                }
+                <Icon
+                  style={{
+                    cursor: "pointer",
+                    paddingLeft: 3,
+                    width: 20,
+                    height: 20
+                  }}
+                  viewBox={{ width: 20, height: 20 }}
+                  paths={[
+                    {
+                      d: "M10 10l5.09-5.09L10 10l5.09 5.09L10 10zm0 0L4.91 4.91 10 10l-5.09 5.09L10 10z",
+                      stroke: "black"
+                    }
+                  ]}
+                  ariaLabel="button"
+                  onClick={event => {
+                    event.stopPropagation();
+                    removeItem(index);
+                  }}
+                />
+              </Badge>
+            );
+          })}
+        </ScrollView>
+      )}
+      <Divider orientation="horizontal" marginTop={5} />
+    </React.Fragment>
+  );
+
   if (lengthLimit !== undefined && items.length >= lengthLimit && !isEditing) {
     return arraySection;
   }
   return (
     <React.Fragment>
+      <Text>{label}</Text>
       {isEditing && children}
       {!isEditing ? (
         <>
-          <Text>{label}</Text>
           <Button
             onClick={() => {
               setIsEditing(true);
@@ -111,53 +170,7 @@ function ArrayField({
           </Button>
         </Flex>
       )}
-      {!!items?.length && (
-        <ScrollView height="inherit" width="inherit" maxHeight={"7rem"}>
-          {items.map((value, index) => {
-            return (
-              <Badge
-                key={index}
-                style={{
-                  cursor: "pointer",
-                  alignItems: "center",
-                  marginRight: 3,
-                  marginTop: 3,
-                  backgroundColor: index === selectedBadgeIndex ? "#B8CEF9" : ""
-                }}
-                onClick={() => {
-                  setSelectedBadgeIndex(index);
-                  setFieldValue(
-                    getBadgeText ? getBadgeText(items[index]) : items[index]
-                  );
-                  setIsEditing(true);
-                }}
-              >
-                {getBadgeText ? getBadgeText(value) : value.toString()}
-                <Icon
-                  style={{
-                    cursor: "pointer",
-                    paddingLeft: 3,
-                    width: 20,
-                    height: 20
-                  }}
-                  viewBox={{ width: 20, height: 20 }}
-                  paths={[
-                    {
-                      d: "M10 10l5.09-5.09L10 10l5.09 5.09L10 10zm0 0L4.91 4.91 10 10l-5.09 5.09L10 10z",
-                      stroke: "black"
-                    }
-                  ]}
-                  ariaLabel="button"
-                  onClick={event => {
-                    event.stopPropagation();
-                    removeItem(index);
-                  }}
-                />
-              </Badge>
-            );
-          })}
-        </ScrollView>
-      )}
+
       <Divider orientation="horizontal" marginTop={5} />
     </React.Fragment>
   );
@@ -196,6 +209,7 @@ export default function MyMemberForm(props) {
     type: "collection",
     model: Team
   }).items;
+  console.log(teamRecords);
   const getDisplayValue = {
     team: record => record?.id
   };
@@ -262,14 +276,17 @@ export default function MyMemberForm(props) {
           modelFields = onSubmit(modelFields);
         }
         try {
+          console.log(modelFields);
           await DataStore.save(new Member(modelFields));
           if (onSuccess) {
+            console.log("onSuccess");
             onSuccess(modelFields);
           }
           if (clearOnSuccess) {
             resetStateValues();
           }
         } catch (err) {
+          console.log("in catch");
           if (onError) {
             onError(modelFields, err.message);
           }
@@ -348,7 +365,7 @@ export default function MyMemberForm(props) {
         }}
         currentFieldValue={currentTeamValue}
         label={"Team"}
-        items={[team]}
+        items={team ? [team] : []}
         hasError={errors.team?.hasError}
         getBadgeText={getDisplayValue.team}
         setFieldValue={currentTeamDisplayValue}
@@ -360,11 +377,11 @@ export default function MyMemberForm(props) {
           isRequired={false}
           isReadOnly={false}
           value={currentTeamDisplayValue}
-          suggestions={teamRecords.map(r => ({
+          options={teamRecords.map(r => ({
             id: r.id,
             label: getDisplayValue.team?.(r) ?? r.id
           }))}
-          onSuggestionSelect={({ id, label }) => {
+          onSelect={({ id, label }) => {
             setCurrentTeamValue(teamRecords.find(r => r.id === id));
             setCurrentTeamDisplayValue(label);
           }}

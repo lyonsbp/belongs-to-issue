@@ -17,15 +17,8 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "teamID": {
-                    "name": "teamID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "Team": {
-                    "name": "Team",
+                "team": {
+                    "name": "team",
                     "isArray": false,
                     "type": {
                         "model": "Team"
@@ -60,15 +53,6 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byTeam",
-                        "fields": [
-                            "teamID"
-                        ]
-                    }
                 },
                 {
                     "type": "auth",
@@ -115,7 +99,7 @@ export const schema = {
                     "attributes": [],
                     "association": {
                         "connectionType": "HAS_ONE",
-                        "associatedWith": "Team",
+                        "associatedWith": "team",
                         "targetName": "teamProjectId"
                     }
                 },
@@ -130,7 +114,7 @@ export const schema = {
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "teamID"
+                        "associatedWith": "teamMembersId"
                     }
                 },
                 "createdAt": {
@@ -199,8 +183,8 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "Team": {
-                    "name": "Team",
+                "team": {
+                    "name": "team",
                     "isArray": false,
                     "type": {
                         "model": "Team"
@@ -258,5 +242,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.1",
-    "version": "f4d166560661ebce8a75b9c1b1735ed1"
+    "version": "bbaea5a1eca3afcda874571caea83023"
 };
