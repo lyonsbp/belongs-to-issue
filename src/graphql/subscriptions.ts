@@ -7,8 +7,7 @@ export const onCreateMember = /* GraphQL */ `
     onCreateMember(filter: $filter) {
       id
       name
-      teamID
-      Team {
+      team {
         id
         name
         createdAt
@@ -23,6 +22,7 @@ export const onCreateMember = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      teamMembersId
     }
   }
 `;
@@ -31,8 +31,7 @@ export const onUpdateMember = /* GraphQL */ `
     onUpdateMember(filter: $filter) {
       id
       name
-      teamID
-      Team {
+      team {
         id
         name
         createdAt
@@ -47,6 +46,7 @@ export const onUpdateMember = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      teamMembersId
     }
   }
 `;
@@ -55,8 +55,7 @@ export const onDeleteMember = /* GraphQL */ `
     onDeleteMember(filter: $filter) {
       id
       name
-      teamID
-      Team {
+      team {
         id
         name
         createdAt
@@ -71,6 +70,7 @@ export const onDeleteMember = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      teamMembersId
     }
   }
 `;
@@ -87,6 +87,7 @@ export const onCreateTeam = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        projectTeamId
       }
       Members {
         nextToken
@@ -114,6 +115,7 @@ export const onUpdateTeam = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        projectTeamId
       }
       Members {
         nextToken
@@ -141,6 +143,7 @@ export const onDeleteTeam = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        projectTeamId
       }
       Members {
         nextToken
@@ -160,11 +163,22 @@ export const onCreateProject = /* GraphQL */ `
     onCreateProject(filter: $filter) {
       id
       name
+      team {
+        id
+        name
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        teamProjectId
+      }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      projectTeamId
     }
   }
 `;
@@ -173,11 +187,22 @@ export const onUpdateProject = /* GraphQL */ `
     onUpdateProject(filter: $filter) {
       id
       name
+      team {
+        id
+        name
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        teamProjectId
+      }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      projectTeamId
     }
   }
 `;
@@ -186,11 +211,22 @@ export const onDeleteProject = /* GraphQL */ `
     onDeleteProject(filter: $filter) {
       id
       name
+      team {
+        id
+        name
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        teamProjectId
+      }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      projectTeamId
     }
   }
 `;

@@ -5,16 +5,16 @@
 export type CreateMemberInput = {
   id?: string | null,
   name?: string | null,
-  teamID: string,
   _version?: number | null,
+  teamMembersId?: string | null,
 };
 
 export type ModelMemberConditionInput = {
   name?: ModelStringInput | null,
-  teamID?: ModelIDInput | null,
   and?: Array< ModelMemberConditionInput | null > | null,
   or?: Array< ModelMemberConditionInput | null > | null,
   not?: ModelMemberConditionInput | null,
+  teamMembersId?: ModelIDInput | null,
 };
 
 export type ModelStringInput = {
@@ -77,13 +77,13 @@ export type Member = {
   __typename: "Member",
   id: string,
   name?: string | null,
-  teamID: string,
-  Team?: Team | null,
+  team?: Team | null,
   createdAt: string,
   updatedAt: string,
   _version: number,
   _deleted?: boolean | null,
   _lastChangedAt: number,
+  teamMembersId?: string | null,
 };
 
 export type Team = {
@@ -104,11 +104,13 @@ export type Project = {
   __typename: "Project",
   id: string,
   name: string,
+  team?: Team | null,
   createdAt: string,
   updatedAt: string,
   _version: number,
   _deleted?: boolean | null,
   _lastChangedAt: number,
+  projectTeamId?: string | null,
 };
 
 export type ModelMemberConnection = {
@@ -121,8 +123,8 @@ export type ModelMemberConnection = {
 export type UpdateMemberInput = {
   id: string,
   name?: string | null,
-  teamID?: string | null,
   _version?: number | null,
+  teamMembersId?: string | null,
 };
 
 export type DeleteMemberInput = {
@@ -161,6 +163,7 @@ export type CreateProjectInput = {
   id?: string | null,
   name: string,
   _version?: number | null,
+  projectTeamId?: string | null,
 };
 
 export type ModelProjectConditionInput = {
@@ -168,12 +171,14 @@ export type ModelProjectConditionInput = {
   and?: Array< ModelProjectConditionInput | null > | null,
   or?: Array< ModelProjectConditionInput | null > | null,
   not?: ModelProjectConditionInput | null,
+  projectTeamId?: ModelIDInput | null,
 };
 
 export type UpdateProjectInput = {
   id: string,
   name?: string | null,
   _version?: number | null,
+  projectTeamId?: string | null,
 };
 
 export type DeleteProjectInput = {
@@ -184,10 +189,10 @@ export type DeleteProjectInput = {
 export type ModelMemberFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
-  teamID?: ModelIDInput | null,
   and?: Array< ModelMemberFilterInput | null > | null,
   or?: Array< ModelMemberFilterInput | null > | null,
   not?: ModelMemberFilterInput | null,
+  teamMembersId?: ModelIDInput | null,
 };
 
 export type ModelTeamFilterInput = {
@@ -212,6 +217,7 @@ export type ModelProjectFilterInput = {
   and?: Array< ModelProjectFilterInput | null > | null,
   or?: Array< ModelProjectFilterInput | null > | null,
   not?: ModelProjectFilterInput | null,
+  projectTeamId?: ModelIDInput | null,
 };
 
 export type ModelProjectConnection = {
@@ -224,7 +230,6 @@ export type ModelProjectConnection = {
 export type ModelSubscriptionMemberFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   name?: ModelSubscriptionStringInput | null,
-  teamID?: ModelSubscriptionIDInput | null,
   and?: Array< ModelSubscriptionMemberFilterInput | null > | null,
   or?: Array< ModelSubscriptionMemberFilterInput | null > | null,
 };
@@ -283,8 +288,7 @@ export type CreateMemberMutation = {
     __typename: "Member",
     id: string,
     name?: string | null,
-    teamID: string,
-    Team?:  {
+    team?:  {
       __typename: "Team",
       id: string,
       name: string,
@@ -300,6 +304,7 @@ export type CreateMemberMutation = {
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
+    teamMembersId?: string | null,
   } | null,
 };
 
@@ -313,8 +318,7 @@ export type UpdateMemberMutation = {
     __typename: "Member",
     id: string,
     name?: string | null,
-    teamID: string,
-    Team?:  {
+    team?:  {
       __typename: "Team",
       id: string,
       name: string,
@@ -330,6 +334,7 @@ export type UpdateMemberMutation = {
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
+    teamMembersId?: string | null,
   } | null,
 };
 
@@ -343,8 +348,7 @@ export type DeleteMemberMutation = {
     __typename: "Member",
     id: string,
     name?: string | null,
-    teamID: string,
-    Team?:  {
+    team?:  {
       __typename: "Team",
       id: string,
       name: string,
@@ -360,6 +364,7 @@ export type DeleteMemberMutation = {
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
+    teamMembersId?: string | null,
   } | null,
 };
 
@@ -382,6 +387,7 @@ export type CreateTeamMutation = {
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
+      projectTeamId?: string | null,
     } | null,
     Members?:  {
       __typename: "ModelMemberConnection",
@@ -416,6 +422,7 @@ export type UpdateTeamMutation = {
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
+      projectTeamId?: string | null,
     } | null,
     Members?:  {
       __typename: "ModelMemberConnection",
@@ -450,6 +457,7 @@ export type DeleteTeamMutation = {
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
+      projectTeamId?: string | null,
     } | null,
     Members?:  {
       __typename: "ModelMemberConnection",
@@ -475,61 +483,7 @@ export type CreateProjectMutation = {
     __typename: "Project",
     id: string,
     name: string,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-  } | null,
-};
-
-export type UpdateProjectMutationVariables = {
-  input: UpdateProjectInput,
-  condition?: ModelProjectConditionInput | null,
-};
-
-export type UpdateProjectMutation = {
-  updateProject?:  {
-    __typename: "Project",
-    id: string,
-    name: string,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-  } | null,
-};
-
-export type DeleteProjectMutationVariables = {
-  input: DeleteProjectInput,
-  condition?: ModelProjectConditionInput | null,
-};
-
-export type DeleteProjectMutation = {
-  deleteProject?:  {
-    __typename: "Project",
-    id: string,
-    name: string,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-  } | null,
-};
-
-export type GetMemberQueryVariables = {
-  id: string,
-};
-
-export type GetMemberQuery = {
-  getMember?:  {
-    __typename: "Member",
-    id: string,
-    name?: string | null,
-    teamID: string,
-    Team?:  {
+    team?:  {
       __typename: "Team",
       id: string,
       name: string,
@@ -545,6 +499,96 @@ export type GetMemberQuery = {
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
+    projectTeamId?: string | null,
+  } | null,
+};
+
+export type UpdateProjectMutationVariables = {
+  input: UpdateProjectInput,
+  condition?: ModelProjectConditionInput | null,
+};
+
+export type UpdateProjectMutation = {
+  updateProject?:  {
+    __typename: "Project",
+    id: string,
+    name: string,
+    team?:  {
+      __typename: "Team",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      teamProjectId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    projectTeamId?: string | null,
+  } | null,
+};
+
+export type DeleteProjectMutationVariables = {
+  input: DeleteProjectInput,
+  condition?: ModelProjectConditionInput | null,
+};
+
+export type DeleteProjectMutation = {
+  deleteProject?:  {
+    __typename: "Project",
+    id: string,
+    name: string,
+    team?:  {
+      __typename: "Team",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      teamProjectId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    projectTeamId?: string | null,
+  } | null,
+};
+
+export type GetMemberQueryVariables = {
+  id: string,
+};
+
+export type GetMemberQuery = {
+  getMember?:  {
+    __typename: "Member",
+    id: string,
+    name?: string | null,
+    team?:  {
+      __typename: "Team",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      teamProjectId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    teamMembersId?: string | null,
   } | null,
 };
 
@@ -561,12 +605,12 @@ export type ListMembersQuery = {
       __typename: "Member",
       id: string,
       name?: string | null,
-      teamID: string,
       createdAt: string,
       updatedAt: string,
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
+      teamMembersId?: string | null,
     } | null >,
     nextToken?: string | null,
     startedAt?: number | null,
@@ -587,12 +631,12 @@ export type SyncMembersQuery = {
       __typename: "Member",
       id: string,
       name?: string | null,
-      teamID: string,
       createdAt: string,
       updatedAt: string,
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
+      teamMembersId?: string | null,
     } | null >,
     nextToken?: string | null,
     startedAt?: number | null,
@@ -617,6 +661,7 @@ export type GetTeamQuery = {
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
+      projectTeamId?: string | null,
     } | null,
     Members?:  {
       __typename: "ModelMemberConnection",
@@ -692,11 +737,23 @@ export type GetProjectQuery = {
     __typename: "Project",
     id: string,
     name: string,
+    team?:  {
+      __typename: "Team",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      teamProjectId?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
+    projectTeamId?: string | null,
   } | null,
 };
 
@@ -718,6 +775,7 @@ export type ListProjectsQuery = {
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
+      projectTeamId?: string | null,
     } | null >,
     nextToken?: string | null,
     startedAt?: number | null,
@@ -743,6 +801,7 @@ export type SyncProjectsQuery = {
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
+      projectTeamId?: string | null,
     } | null >,
     nextToken?: string | null,
     startedAt?: number | null,
@@ -758,8 +817,7 @@ export type OnCreateMemberSubscription = {
     __typename: "Member",
     id: string,
     name?: string | null,
-    teamID: string,
-    Team?:  {
+    team?:  {
       __typename: "Team",
       id: string,
       name: string,
@@ -775,6 +833,7 @@ export type OnCreateMemberSubscription = {
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
+    teamMembersId?: string | null,
   } | null,
 };
 
@@ -787,8 +846,7 @@ export type OnUpdateMemberSubscription = {
     __typename: "Member",
     id: string,
     name?: string | null,
-    teamID: string,
-    Team?:  {
+    team?:  {
       __typename: "Team",
       id: string,
       name: string,
@@ -804,6 +862,7 @@ export type OnUpdateMemberSubscription = {
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
+    teamMembersId?: string | null,
   } | null,
 };
 
@@ -816,8 +875,7 @@ export type OnDeleteMemberSubscription = {
     __typename: "Member",
     id: string,
     name?: string | null,
-    teamID: string,
-    Team?:  {
+    team?:  {
       __typename: "Team",
       id: string,
       name: string,
@@ -833,6 +891,7 @@ export type OnDeleteMemberSubscription = {
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
+    teamMembersId?: string | null,
   } | null,
 };
 
@@ -854,6 +913,7 @@ export type OnCreateTeamSubscription = {
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
+      projectTeamId?: string | null,
     } | null,
     Members?:  {
       __typename: "ModelMemberConnection",
@@ -887,6 +947,7 @@ export type OnUpdateTeamSubscription = {
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
+      projectTeamId?: string | null,
     } | null,
     Members?:  {
       __typename: "ModelMemberConnection",
@@ -920,6 +981,7 @@ export type OnDeleteTeamSubscription = {
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
+      projectTeamId?: string | null,
     } | null,
     Members?:  {
       __typename: "ModelMemberConnection",
@@ -944,11 +1006,23 @@ export type OnCreateProjectSubscription = {
     __typename: "Project",
     id: string,
     name: string,
+    team?:  {
+      __typename: "Team",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      teamProjectId?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
+    projectTeamId?: string | null,
   } | null,
 };
 
@@ -961,11 +1035,23 @@ export type OnUpdateProjectSubscription = {
     __typename: "Project",
     id: string,
     name: string,
+    team?:  {
+      __typename: "Team",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      teamProjectId?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
+    projectTeamId?: string | null,
   } | null,
 };
 
@@ -978,10 +1064,22 @@ export type OnDeleteProjectSubscription = {
     __typename: "Project",
     id: string,
     name: string,
+    team?:  {
+      __typename: "Team",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      teamProjectId?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
+    projectTeamId?: string | null,
   } | null,
 };

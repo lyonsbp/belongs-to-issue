@@ -27,7 +27,7 @@ export const schema = {
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
-                        "targetName": "teamMembersId"
+                        "targetName": "teamID"
                     }
                 },
                 "createdAt": {
@@ -53,6 +53,15 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byTeam",
+                        "fields": [
+                            "teamID"
+                        ]
+                    }
                 },
                 {
                     "type": "auth",
@@ -114,7 +123,7 @@ export const schema = {
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "teamMembersId"
+                        "associatedWith": "team"
                     }
                 },
                 "createdAt": {
@@ -242,5 +251,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.1",
-    "version": "bbaea5a1eca3afcda874571caea83023"
+    "version": "3a156e29cba4b67103e16304710e4cd3"
 };

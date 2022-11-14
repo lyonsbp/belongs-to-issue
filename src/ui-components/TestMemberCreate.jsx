@@ -1,9 +1,4 @@
-/** *************************************************************************
- * The contents of this file were generated with Amplify Studio.           *
- * Please refrain from making any modifications to this file.              *
- * Any changes to this file will be overwritten when running amplify pull. *
- ************************************************************************* */
-
+/* eslint-disable */
 import * as React from "react";
 import { fetchByPath, validateField } from "./utils";
 import { Member, Team } from "../models";
@@ -72,7 +67,6 @@ function ArrayField({
   const arraySection = (
     <React.Fragment>
       <Text>{label}</Text>
-
       {!!items?.length && (
         <ScrollView height="inherit" width="inherit" maxHeight={"7rem"}>
           {items.map((value, index) => {
@@ -88,17 +82,13 @@ function ArrayField({
                 }}
                 onClick={() => {
                   setSelectedBadgeIndex(index);
-                  // populate display value
                   setFieldValue(
                     getBadgeText ? getBadgeText(items[index]) : items[index]
                   );
                   setIsEditing(true);
                 }}
               >
-                {
-                  // custom badge text
-                  getBadgeText ? getBadgeText(value) : value.toString()
-                }
+                {getBadgeText ? getBadgeText(value) : value.toString()}
                 <Icon
                   style={{
                     cursor: "pointer",
@@ -127,16 +117,15 @@ function ArrayField({
       <Divider orientation="horizontal" marginTop={5} />
     </React.Fragment>
   );
-
   if (lengthLimit !== undefined && items.length >= lengthLimit && !isEditing) {
     return arraySection;
   }
   return (
     <React.Fragment>
-      <Text>{label}</Text>
       {isEditing && children}
       {!isEditing ? (
         <>
+          <Text>{label}</Text>
           <Button
             onClick={() => {
               setIsEditing(true);
@@ -170,8 +159,6 @@ function ArrayField({
           </Button>
         </Flex>
       )}
-
-      <Divider orientation="horizontal" marginTop={5} />
     </React.Fragment>
   );
 }
@@ -209,7 +196,6 @@ export default function MyMemberForm(props) {
     type: "collection",
     model: Team
   }).items;
-  console.log(teamRecords);
   const getDisplayValue = {
     team: record => record?.id
   };
@@ -276,17 +262,14 @@ export default function MyMemberForm(props) {
           modelFields = onSubmit(modelFields);
         }
         try {
-          console.log(modelFields);
           await DataStore.save(new Member(modelFields));
           if (onSuccess) {
-            console.log("onSuccess");
             onSuccess(modelFields);
           }
           if (clearOnSuccess) {
             resetStateValues();
           }
         } catch (err) {
-          console.log("in catch");
           if (onError) {
             onError(modelFields, err.message);
           }

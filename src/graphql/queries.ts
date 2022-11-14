@@ -7,8 +7,7 @@ export const getMember = /* GraphQL */ `
     getMember(id: $id) {
       id
       name
-      teamID
-      Team {
+      team {
         id
         name
         createdAt
@@ -23,6 +22,7 @@ export const getMember = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      teamMembersId
     }
   }
 `;
@@ -36,12 +36,12 @@ export const listMembers = /* GraphQL */ `
       items {
         id
         name
-        teamID
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
+        teamMembersId
       }
       nextToken
       startedAt
@@ -64,12 +64,12 @@ export const syncMembers = /* GraphQL */ `
       items {
         id
         name
-        teamID
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
+        teamMembersId
       }
       nextToken
       startedAt
@@ -89,6 +89,7 @@ export const getTeam = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        projectTeamId
       }
       Members {
         nextToken
@@ -158,11 +159,22 @@ export const getProject = /* GraphQL */ `
     getProject(id: $id) {
       id
       name
+      team {
+        id
+        name
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        teamProjectId
+      }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      projectTeamId
     }
   }
 `;
@@ -181,6 +193,7 @@ export const listProjects = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        projectTeamId
       }
       nextToken
       startedAt
@@ -208,6 +221,7 @@ export const syncProjects = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        projectTeamId
       }
       nextToken
       startedAt
